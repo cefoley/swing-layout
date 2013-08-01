@@ -1,6 +1,5 @@
 package cfoley.swingLayout;
 
-
 public class Layout {
 
 	public static BorderBuilder borders() {
@@ -21,6 +20,10 @@ public class Layout {
 
 	public static ScrollerBuilder scroller(Object o) {
 		return new ScrollerBuilder(o);
+	}
+
+	public static FlowBuilder flow(Object... os) {
+		return new FlowBuilder().add(os);
 	}
 
 }

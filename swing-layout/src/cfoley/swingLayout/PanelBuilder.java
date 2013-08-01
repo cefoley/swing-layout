@@ -40,10 +40,15 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> {
 		return self();
 	}
 
-	protected JComponent format(JComponent c) {
-		return addPadding(c);
+	public JComponent build() {
+		return addPadding(subclassBuild());
 	}
 
+	protected abstract JComponent subclassBuild();
+
+	// TODO avoid creating a new panel if possible.
+	// BorderBuilder, GridBuilder, etc don't need a wrapper panel.
+	// ScrollerBuilder probably does.
 	private JComponent addPadding(JComponent c) {
 		boolean hasPadding = (padLeft != 0) || (padRight != 0) || (padTop != 0) || (padBottom != 0);
 		if (hasPadding) {
@@ -54,12 +59,6 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> {
 			return c;
 		}
 	}
-
-	public JComponent build() {
-		return format(subclassBuild());
-	}
-
-	protected abstract JComponent subclassBuild();
 
 	public abstract T self();
 
