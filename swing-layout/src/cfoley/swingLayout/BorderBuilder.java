@@ -11,8 +11,8 @@ public class BorderBuilder extends PanelBuilder<BorderBuilder> {
 	private int vgap = 0;
 
 	/** Use Layout.borders() */
-	BorderBuilder() {
-		super();
+	BorderBuilder(ComponentConverter converter) {
+		super(converter);
 	}
 
 	public BorderBuilder gap(int i) {
@@ -30,27 +30,27 @@ public class BorderBuilder extends PanelBuilder<BorderBuilder> {
 	}
 
 	public BorderBuilder north(Object o) {
-		north = component(o);
+		north = toComponent(o);
 		return this;
 	}
 
 	public BorderBuilder south(Object o) {
-		south = component(o);
+		south = toComponent(o);
 		return this;
 	}
 
 	public BorderBuilder east(Object o) {
-		east = component(o);
+		east = toComponent(o);
 		return this;
 	}
 
 	public BorderBuilder west(Object o) {
-		west = component(o);
+		west = toComponent(o);
 		return this;
 	}
 
 	public BorderBuilder center(Object o) {
-		center = component(o);
+		center = toComponent(o);
 		return this;
 	}
 

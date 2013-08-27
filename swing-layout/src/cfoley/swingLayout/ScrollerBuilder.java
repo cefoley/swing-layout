@@ -8,8 +8,9 @@ public class ScrollerBuilder extends PanelBuilder<ScrollerBuilder> {
 	private int vertical = JScrollPane.VERTICAL_SCROLLBAR_NEVER;
 	private int horizontal = JScrollPane.HORIZONTAL_SCROLLBAR_NEVER;
 
-	ScrollerBuilder(Object component) {
-		this.component = component(component);
+	ScrollerBuilder(ComponentConverter converter, Object component) {
+		super(converter);
+		this.component = toComponent(component);
 	}
 
 	public ScrollerBuilder horizontal() {

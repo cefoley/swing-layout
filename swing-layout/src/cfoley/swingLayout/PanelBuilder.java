@@ -2,17 +2,17 @@ package cfoley.swingLayout;
 
 import javax.swing.*;
 
-public abstract class PanelBuilder<T extends PanelBuilder<T>> {
+public abstract class PanelBuilder<T extends PanelBuilder<T>> implements ComponentConverter {
 
 	private int padLeft, padRight, padTop, padBottom;
-
 	private ComponentConverter converter;
 
-	protected PanelBuilder() {
-		converter = Defaults.componentConverter;
+	protected PanelBuilder(ComponentConverter converter) {
+		this.converter = converter;
 	}
 
-	protected JComponent component(Object o) {
+	@Override
+	public JComponent toComponent(Object o) {
 		return converter.toComponent(o);
 	}
 

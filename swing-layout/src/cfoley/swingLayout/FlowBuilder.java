@@ -10,12 +10,11 @@ public class FlowBuilder extends PanelBuilder<FlowBuilder> {
 	private int align, hgap, vgap;
 	private boolean isValignedOnBaseline = false;
 
-	private ComponentConverter converter;
 	private ArrayList<Component> items;
 
 	/** Use Layout.flow() */
-	FlowBuilder() {
-		converter = Defaults.componentConverter;
+	FlowBuilder(ComponentConverter converter) {
+		super(converter);
 		items = new ArrayList<>();
 		FlowLayout defaults = new FlowLayout();
 		align = defaults.getAlignment();
@@ -23,7 +22,7 @@ public class FlowBuilder extends PanelBuilder<FlowBuilder> {
 
 	public FlowBuilder add(Object... os) {
 		for (Object o : os) {
-			items.add(converter.toComponent(o));
+			items.add(toComponent(o));
 		}
 		return this;
 	}

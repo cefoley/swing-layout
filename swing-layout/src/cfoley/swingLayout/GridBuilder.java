@@ -6,13 +6,12 @@ import java.util.*;
 import javax.swing.*;
 
 public class GridBuilder extends PanelBuilder<GridBuilder> {
-	private ComponentConverter converter;
 	private int rows, cols, vgap, hgap;
 	private ArrayList<Component> items;
 
 	/** Use Layout.grid() */
-	GridBuilder() {
-		converter = Defaults.componentConverter;
+	GridBuilder(ComponentConverter converter) {
+		super(converter);
 		items = new ArrayList<>();
 	}
 
@@ -42,7 +41,7 @@ public class GridBuilder extends PanelBuilder<GridBuilder> {
 
 	public GridBuilder add(Object... os) {
 		for (Object o : os) {
-			items.add(converter.toComponent(o));
+			items.add(toComponent(o));
 		}
 		return this;
 	}
