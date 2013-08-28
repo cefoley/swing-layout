@@ -27,5 +27,21 @@ public class LayoutBuilder {
 	public FlowBuilder flow(Object... os) {
 		return new FlowBuilder(converter).add(os);
 	}
+	
+	public HorizontalSplitPaneBuilder horizontalSplitPane(Object left, Object right) {
+		return horizontalSplitPane().left(left).right(right);
+	}
+
+	public HorizontalSplitPaneBuilder horizontalSplitPane() {
+		return new HorizontalSplitPaneBuilder(converter);
+	}
+	
+	public VerticalSplitPaneBuilder verticalSplitPane(Object top, Object bottom) {
+		return verticalSplitPane().top(top).bottom(bottom);
+	}
+
+	public VerticalSplitPaneBuilder verticalSplitPane() {
+		return new VerticalSplitPaneBuilder(converter);
+	}
 
 }
