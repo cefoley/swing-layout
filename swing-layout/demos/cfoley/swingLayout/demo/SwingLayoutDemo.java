@@ -33,7 +33,9 @@ public class SwingLayoutDemo extends JFrame {
 						// TODO card
 						flowLayout(),
 						hSplit(),
-						vSplit());
+						vSplit(),
+						scroll(),
+						tab());
 
 	}
 	
@@ -78,6 +80,21 @@ public class SwingLayoutDemo extends JFrame {
 
 	private Object vSplit() {
 		return verticalSplitPane(new JButton("Top"), new JButton("Bottom")).continuousLayoutOff();
+	}
+	
+	private Object scroll() {
+		Integer[] data = new Integer[100];
+		for(int i = 0; i < data.length; i++) {
+			data[i] = i;
+		}
+		return scroller(new JList<>(data)).vertical();
+	}
+	
+	private Object tab() {
+		return tabs()
+				.addTab("Some tabs", "A")
+				.addTab(borderLayout(), "B")
+				.addTab(gridLayout(), "C");
 	}
 
 }
