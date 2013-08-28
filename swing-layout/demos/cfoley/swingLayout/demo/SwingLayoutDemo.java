@@ -29,7 +29,10 @@ public class SwingLayoutDemo extends JFrame {
 				.add(borderLayout(), 
 						gridLayout(),
 						hBox(),
-						vBox());
+						vBox(),
+						// TODO card
+						flowLayout());
+
 	}
 	
 	private Object borderLayout() {
@@ -61,6 +64,10 @@ public class SwingLayoutDemo extends JFrame {
 				.addRigidArea(0, 30)
 				.add(new JTextField("textField"))
 				.addGlue();
+	}
+	
+	private Object flowLayout() {
+		return flow("Flow Layout", new JButton("Button"), new JTextField(20)).gap(5);
 	}
 
 }
