@@ -13,10 +13,6 @@ public class CardBuilder extends PanelBuilder<CardBuilder> {
 	private List<JComponent> components = new ArrayList<>();
 	private List<String> names = new ArrayList<>();
 
-	protected CardBuilder(ComponentConverter converter) {
-		this(converter, new CardLayout());
-	}
-
 	protected CardBuilder(ComponentConverter converter, CardLayout layout) {
 		super(converter);
 		this.layout = layout;
