@@ -32,19 +32,19 @@ public class Layout {
 		return builder.flow(os);
 	}
 	
-	public HorizontalSplitPaneBuilder horizontalSplitPane(Object left, Object right) {
+	public static HorizontalSplitPaneBuilder horizontalSplitPane(Object left, Object right) {
 		return builder.horizontalSplitPane(left, right);
 	}
 
-	public HorizontalSplitPaneBuilder horizontalSplitPane() {
+	public static HorizontalSplitPaneBuilder horizontalSplitPane() {
 		return builder.horizontalSplitPane();
 	}
 	
-	public VerticalSplitPaneBuilder verticalSplitPane(Object top, Object bottom) {
+	public static VerticalSplitPaneBuilder verticalSplitPane(Object top, Object bottom) {
 		return builder.verticalSplitPane(top, bottom);
 	}
 
-	public VerticalSplitPaneBuilder verticalSplitPane() {
+	public static VerticalSplitPaneBuilder verticalSplitPane() {
 		return builder.verticalSplitPane();
 	}
 
