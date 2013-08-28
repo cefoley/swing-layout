@@ -1,11 +1,14 @@
 package cfoley.swingLayout;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.border.Border;
 
 public abstract class PanelBuilder<T extends PanelBuilder<T>> implements ComponentConverter {
 
 	private int padLeft, padRight, padTop, padBottom;
 	private ComponentConverter converter;
+	private Border border;
 
 	protected PanelBuilder(ComponentConverter converter) {
 		this.converter = converter;
@@ -39,6 +42,11 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 		padBottom = i;
 		return self();
 	}
+	
+	public T border(Border b) {
+		border = b;
+		return self();
+	}
 
 	public JComponent build() {
 		return addPadding(subclassBuild());
@@ -50,15 +58,40 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 	// BorderBuilder, GridBuilder, etc don't need a wrapper panel.
 	// ScrollerBuilder probably does.
 	private JComponent addPadding(JComponent c) {
-		boolean hasPadding = (padLeft != 0) || (padRight != 0) || (padTop != 0) || (padBottom != 0);
-		if (hasPadding) {
+		if (hasBorder()) {
 			JComponent result = Layout.borders().center(c).build();
-			result.setBorder(BorderFactory.createEmptyBorder(padTop, padLeft, padBottom, padRight));
+			result.setBorder(makeBorder());
 			return result;
 		} else {
 			return c;
 		}
 	}
+	
+	private boolean hasBorder() {
+		return (border != null) || hasPadding();
+	}
+	
+	private boolean hasPadding() {
+		return (padLeft != 0) || 
+				(padRight != 0) || 
+				(padTop != 0) || 
+				(padBottom != 0);
+	}
+	
+	private Border makeBorder() {
+		if (hasPadding()) {
+			Border padding = BorderFactory.createEmptyBorder(padTop, padLeft, padBottom, padRight);
+			if (border == null) {
+				return padding;
+			} else {
+				return BorderFactory.createCompoundBorder(padding, border);
+			}
+		} else {
+			return border;
+		}
+	}
+	
+	
 
 	public abstract T self();
 
