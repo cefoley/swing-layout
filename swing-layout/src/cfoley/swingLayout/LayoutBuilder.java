@@ -43,5 +43,13 @@ public class LayoutBuilder {
 	public VerticalSplitPaneBuilder verticalSplitPane() {
 		return new VerticalSplitPaneBuilder(converter);
 	}
+	
+	public BoxBuilder verticalBox() {
+		return new BoxBuilder(converter).vertical();
+	}
+
+	public BoxBuilder horizontalBox() {
+		return new BoxBuilder(converter).horizontal();
+	}
 
 }
