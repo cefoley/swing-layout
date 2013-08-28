@@ -1,5 +1,7 @@
 package cfoley.swingLayout;
 
+import java.awt.CardLayout;
+
 public class Layout {
 
 	private static LayoutBuilder builder = new LayoutBuilder();
@@ -47,6 +49,16 @@ public class Layout {
 	public VerticalSplitPaneBuilder verticalSplitPane() {
 		return builder.verticalSplitPane();
 	}
+	
+	public static CardBuilder card() {
+		return builder.card();
+	}
+	
+	public static CardBuilder card(CardLayout layout) {
+		return builder.card(layout);
+	}
+
+	
 
 
 }
