@@ -2,6 +2,8 @@ package cfoley.swingLayout;
 
 import java.awt.CardLayout;
 
+import javax.swing.JTabbedPane;
+
 public class Layout {
 
 	private static LayoutBuilder builder = new LayoutBuilder();
@@ -65,5 +67,14 @@ public class Layout {
 	public static CardBuilder card(CardLayout layout) {
 		return builder.card(layout);
 	}
+	
+	public static TabbedPaneBuilder tabs() {
+		return builder.tabs();
+	}
+
+	public static TabbedPaneBuilder tabs(JTabbedPane panel) {
+		return builder.tabs(panel);
+	}
+
 
 }
