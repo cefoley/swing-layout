@@ -2,6 +2,9 @@ package cfoley.swingLayout.demo;
 
 import static cfoley.swingLayout.Layout.*;
 
+import java.awt.*;
+import java.awt.event.*;
+
 import javax.swing.*;
 
 import cfoley.swingLayout.*;
@@ -30,7 +33,7 @@ public class SwingLayoutDemo extends JFrame {
 						gridLayout(),
 						hBox(),
 						vBox(),
-						// TODO card
+						cardLayout(),
 						flowLayout(),
 						hSplit(),
 						vSplit(),
@@ -68,6 +71,30 @@ public class SwingLayoutDemo extends JFrame {
 				.addRigidArea(0, 30)
 				.add(new JTextField("textField"))
 				.addGlue();
+	}
+	
+	private Object cardLayout() {
+		final CardLayout layout = new CardLayout();
+		final Container parent;
+		
+		JButton b1 = new JButton("Card Layout (click)");
+		JButton b2 = new JButton("2");
+		JButton b3 = new JButton("3");
+		
+		parent = card(layout).add(b1).add(b2).add(b3).build();
+		
+		ActionListener listener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				layout.next(parent);
+			}
+		};
+		
+		b1.addActionListener(listener);
+		b2.addActionListener(listener);
+		b3.addActionListener(listener);
+		
+		return parent;
 	}
 	
 	private Object flowLayout() {
