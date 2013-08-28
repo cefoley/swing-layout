@@ -1,5 +1,7 @@
 package cfoley.swingLayout;
 
+import java.awt.CardLayout;
+
 public class LayoutBuilder {
 
 	private ComponentConverter converter = Defaults.componentConverter;
@@ -50,6 +52,14 @@ public class LayoutBuilder {
 
 	public BoxBuilder horizontalBox() {
 		return new BoxBuilder(converter).horizontal();
+	}
+
+	public CardBuilder card() {
+		return new CardBuilder(converter);
+	}
+	
+	public CardBuilder card(CardLayout layout) {
+		return new CardBuilder(converter, layout);
 	}
 
 }
