@@ -26,7 +26,10 @@ public class SwingLayoutDemo extends JFrame {
 	
 	private PanelBuilder<?> commonManagers() {
 		return grid().gap(50).pad(10).cols(4)
-				.add(borderLayout(), gridLayout());
+				.add(borderLayout(), 
+						gridLayout(),
+						hBox(),
+						vBox());
 	}
 	
 	private Object borderLayout() {
@@ -41,6 +44,23 @@ public class SwingLayoutDemo extends JFrame {
 	private Object gridLayout() {
 		return grid().rows(4).cols(6).add(
 				"Grid", "", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+	}
+	
+	private Object hBox() {
+		return horizontalBox()
+				.add("H-Box")
+				.addRigidArea(10, 0)
+				.add(new JButton("button"));
+	}
+
+	private Object vBox() {
+		return verticalBox()
+				.add("Vertical Box")
+				.addRigidArea(0, 30)
+				.add(new JButton("button"))
+				.addRigidArea(0, 30)
+				.add(new JTextField("textField"))
+				.addGlue();
 	}
 
 }
