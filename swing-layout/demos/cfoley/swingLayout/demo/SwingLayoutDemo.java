@@ -31,7 +31,9 @@ public class SwingLayoutDemo extends JFrame {
 						hBox(),
 						vBox(),
 						// TODO card
-						flowLayout());
+						flowLayout(),
+						hSplit(),
+						vSplit());
 
 	}
 	
@@ -68,6 +70,14 @@ public class SwingLayoutDemo extends JFrame {
 	
 	private Object flowLayout() {
 		return flow("Flow Layout", new JButton("Button"), new JTextField(20)).gap(5);
+	}
+	
+	private Object hSplit() {
+		return horizontalSplitPane(new JButton("Left side"), new JButton("Right side")).continuousLayoutOn();
+	}
+
+	private Object vSplit() {
+		return verticalSplitPane(new JButton("Top"), new JButton("Bottom")).continuousLayoutOff();
 	}
 
 }
