@@ -24,6 +24,8 @@ public class SwingLayoutDemo extends JFrame {
 	
 	private void setUpLayout() {
 		add(tabs().addTab(commonManagers(), "Common Layout Managers")
+				.addTab(exploreTabs(), "Tabbed Panes")
+				.addTab(splitPanes(), "Split Panes")
 				.build());
 	}
 	
@@ -122,6 +124,20 @@ public class SwingLayoutDemo extends JFrame {
 				.addTab("Some tabs", "A")
 				.addTab(borderLayout(), "B")
 				.addTab(gridLayout(), "C");
+	}
+	
+	private Object exploreTabs() {
+		return grid().rows(2).cols(2).gap(50).pad(10)
+				.add(tabs().tabPlacementTop().addTab(new JButton("A"), "A").addTab(new JButton("B"), "B"))
+				.add(tabs().tabPlacementBottom().addTab(new JButton("A"), "A").addTab(new JButton("B"), "B"))
+				.add(tabs().tabPlacementLeft().addTab(new JButton("A"), "A").addTab(new JButton("B"), "B"))
+				.add(tabs().tabPlacementRight().addTab(new JButton("A"), "A").addTab(new JButton("B"), "B"));
+	}
+	
+	private Object splitPanes() {
+		return grid().cols(2).gap(50).pad(10)
+				.add(horizontalSplitPane().left(new JButton("L")).right("R").oneTouchExpandableOn())
+				.add(verticalSplitPane().top(new JButton("T")).bottom("B").oneTouchExpandableOn());
 	}
 
 }

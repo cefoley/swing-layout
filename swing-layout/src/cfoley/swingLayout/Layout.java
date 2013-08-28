@@ -60,10 +60,6 @@ public class Layout {
 		return builder.horizontalBox();
 	}
 
-	public static CardBuilder card() {
-		return builder.card();
-	}
-	
 	public static CardBuilder card(CardLayout layout) {
 		return builder.card(layout);
 	}

@@ -56,10 +56,6 @@ public class LayoutBuilder {
 		return new BoxBuilder(converter).horizontal();
 	}
 
-	public CardBuilder card() {
-		return new CardBuilder(converter);
-	}
-	
 	public CardBuilder card(CardLayout layout) {
 		return new CardBuilder(converter, layout);
 	}
