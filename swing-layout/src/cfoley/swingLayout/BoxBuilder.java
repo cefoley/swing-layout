@@ -1,16 +1,15 @@
 package cfoley.swingLayout;
 
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
-import javax.swing.Box;
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public class BoxBuilder extends PanelBuilder<BoxBuilder> {
 		
 	boolean isVertical = true;
-	List<Object> items = new ArrayList<>();
+	List<BoxedWidgetMaker> items = new ArrayList<>();
 
 	
 	protected BoxBuilder(ComponentConverter converter) {
@@ -28,13 +27,13 @@ public class BoxBuilder extends PanelBuilder<BoxBuilder> {
 	}
 	
 	public BoxBuilderConfigureLatest add(Object o) {
-		BoxedComponent recent = new BoxedComponent(toComponent(o));
+		BoxedJComponent recent = new BoxedJComponent(toComponent(o));
 		items.add(recent);
 		return new BoxBuilderConfigureLatest(this, recent);
 	}
 	
 	public BoxBuilder addGlue() {
-		items.add(Box.createGlue());
+		items.add(new BoxedComponent(Box.createGlue()));
 		return this;
 	}
 	
@@ -43,20 +42,15 @@ public class BoxBuilder extends PanelBuilder<BoxBuilder> {
 	}
 
 	public BoxBuilder addRigidArea(Dimension d) {
-		items.add(Box.createRigidArea(d));
+		items.add(new BoxedComponent(Box.createRigidArea(d)));
 		return this;
 	}
 
 	@Override
 	protected JComponent subclassBuild() {
 		Box result = isVertical ? Box.createVerticalBox() : Box.createHorizontalBox();
-		for(Object o : items) {
-			if (o instanceof BoxedComponent) {
-				BoxedComponent bc = (BoxedComponent) o;
-				result.add(bc.make(isVertical));
-			} else {
-				result.add((Component) o);
-			}
+		for(BoxedWidgetMaker o : items) {
+			result.add(o.make(isVertical));
 		}
 		return result;
 	}

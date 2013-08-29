@@ -7,10 +7,10 @@ import javax.swing.*;
 public class BoxBuilderConfigureLatest implements JComponentBuilder {
 	
 	private BoxBuilder owner;
-	private BoxedComponent recent;
+	private BoxedJComponent recent;
 
 	
-	protected BoxBuilderConfigureLatest(BoxBuilder owner, BoxedComponent recent) {
+	protected BoxBuilderConfigureLatest(BoxBuilder owner, BoxedJComponent recent) {
 		this.owner = owner;
 		this.recent = recent;
 	}
