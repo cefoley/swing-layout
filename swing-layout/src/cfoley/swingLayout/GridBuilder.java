@@ -15,13 +15,13 @@ public class GridBuilder extends PanelBuilder<GridBuilder> {
 		items = new ArrayList<>();
 	}
 
+	public GridBuilder gap(int i) {
+		return vgap(i).hgap(i);
+	}
+
 	public GridBuilder hgap(int i) {
 		hgap = i;
 		return this;
-	}
-
-	public GridBuilder gap(int i) {
-		return vgap(i).hgap(i);
 	}
 
 	public GridBuilder vgap(int i) {
