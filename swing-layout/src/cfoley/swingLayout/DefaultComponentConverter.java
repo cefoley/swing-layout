@@ -10,8 +10,8 @@ public class DefaultComponentConverter implements ComponentConverter {
 	public JComponent toComponent(Object o) {
 		if (o instanceof JComponent) {
 			return (JComponent) o;
-		} else if (o instanceof PanelBuilder) {
-			return ((PanelBuilder<?>) o).build();
+		} else if (o instanceof JComponentBuilder) {
+			return ((JComponentBuilder) o).build();
 		} else if (o instanceof Component) {
 			JPanel result = new JPanel(new BorderLayout());
 			result.add((Component) o, BorderLayout.CENTER);

@@ -6,7 +6,15 @@ import javax.swing.JTabbedPane;
 
 public class LayoutBuilder {
 
-	private ComponentConverter converter = Defaults.componentConverter;
+	private ComponentConverter converter;
+	
+	public LayoutBuilder() {
+		this(new DefaultComponentConverter());
+	}
+	
+	public LayoutBuilder(ComponentConverter converter) {
+		this.converter = converter;
+	}
 
 	public BorderBuilder borders() {
 		return new BorderBuilder(converter);
