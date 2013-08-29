@@ -54,17 +54,15 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 
 	protected abstract JComponent subclassBuild();
 
-	// TODO avoid creating a new panel if possible.
-	// BorderBuilder, GridBuilder, etc don't need a wrapper panel.
-	// ScrollerBuilder probably does.
 	private JComponent addPadding(JComponent c) {
 		if (hasBorder()) {
-			JComponent result = Layout.borders().center(c).build();
-			result.setBorder(makeBorder());
-			return result;
-		} else {
-			return c;
-		}
+			if (c.getBorder() != null) {
+				return Layout.borders().center(c).border(makeBorder()).build();
+			} else {
+				c.setBorder(makeBorder());
+			}
+		} 
+		return c;
 	}
 	
 	private boolean hasBorder() {

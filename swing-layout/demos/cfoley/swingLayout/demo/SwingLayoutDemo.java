@@ -23,9 +23,9 @@ public class SwingLayoutDemo extends JFrame {
 	}
 	
 	private void setUpLayout() {
-		add(tabs().addTab(commonManagers(), "Common Layout Managers")
-				.addTab(exploreTabs(), "Tabbed Panes")
-				.addTab(splitPanes(), "Split Panes")
+		add(tabs().add("Common Layout Managers", commonManagers())
+				.add("Tabbed Panes", exploreTabs())
+				.add("Split Panes", splitPanes())
 				.build());
 	}
 	
@@ -121,17 +121,17 @@ public class SwingLayoutDemo extends JFrame {
 	
 	private Object tab() {
 		return tabs()
-				.addTab("Some tabs", "A")
-				.addTab(borderLayout(), "B")
-				.addTab(gridLayout(), "C");
+				.add("A", "Some tabs")
+				.add("B", borderLayout())
+				.add("C", gridLayout());
 	}
 	
 	private Object exploreTabs() {
 		return grid().rows(2).cols(2).gap(50).pad(10)
-				.add(tabs().tabPlacementTop().addTab(new JButton("A"), "A").addTab(new JButton("B"), "B"))
-				.add(tabs().tabPlacementBottom().addTab(new JButton("A"), "A").addTab(new JButton("B"), "B"))
-				.add(tabs().tabPlacementLeft().addTab(new JButton("A"), "A").addTab(new JButton("B"), "B"))
-				.add(tabs().tabPlacementRight().addTab(new JButton("A"), "A").addTab(new JButton("B"), "B"));
+				.add(tabs().tabPlacementTop().add("A", new JButton("A")).add("B", new JButton("B")))
+				.add(tabs().tabPlacementBottom().add("A", new JButton("A")).add("B", new JButton("B")))
+				.add(tabs().tabPlacementLeft().add("A", new JButton("A")).add("B", new JButton("B")))
+				.add(tabs().tabPlacementRight().add("A", new JButton("A")).add("B", new JButton("B")));
 	}
 	
 	private Object splitPanes() {

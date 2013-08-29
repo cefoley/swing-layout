@@ -47,12 +47,12 @@ public class TabbedPaneBuilder extends PanelBuilder<TabbedPaneBuilder> {
 		return this;
 	}
 	
-	public TabbedPaneBuilder addTab(Object o, String tabName) {
+	public TabbedPaneBuilder add(String tabName, Object o) {
 		panel.addTab(tabName, toComponent(o));
 		return this;
 	}
 
-	public TabbedPaneBuilder addTab(Object o, String tabName, Icon icon) {
+	public TabbedPaneBuilder add(String tabName, Icon icon, Object o) {
 		panel.addTab(tabName, icon, toComponent(o));
 		return this;
 	}
