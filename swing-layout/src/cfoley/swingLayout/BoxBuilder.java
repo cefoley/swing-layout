@@ -2,18 +2,17 @@ package cfoley.swingLayout;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.swing.Box;
 import javax.swing.JComponent;
 
 public class BoxBuilder extends PanelBuilder<BoxBuilder> {
-	
-	private boolean isVertical = true;
-	private List<Object> items = new ArrayList<>();
-	private BoxedComponent recent = null;
+		
+	boolean isVertical = true;
+	List<Object> items = new ArrayList<>();
 
+	
 	protected BoxBuilder(ComponentConverter converter) {
 		super(converter);
 	}
@@ -28,51 +27,14 @@ public class BoxBuilder extends PanelBuilder<BoxBuilder> {
 		return this;
 	}
 	
-	public BoxBuilder add(Object o) {
-		recent = new BoxedComponent(toComponent(o));
+	public BoxBuilderConfigureLatest add(Object o) {
+		BoxedComponent recent = new BoxedComponent(toComponent(o));
 		items.add(recent);
-		return this;
-	}
-	
-	public BoxBuilder alignment(double d) {
-		return alignment((float)d);
-	}
-
-	public BoxBuilder alignment(float d) {
-		recent.setAlignment(d);
-		return this;
-	}
-
-	public BoxBuilder minSize(int x, int y) {
-		return minSize(new Dimension(x, y));
-	}
-
-	public BoxBuilder minSize(Dimension d) {
-		recent.setMinSize(d);
-		return this;
-	}
-
-	public BoxBuilder maxSize(int x, int y) {
-		return maxSize(new Dimension(x, y));
-	}
-
-	public BoxBuilder maxSize(Dimension d) {
-		recent.setMaxSize(d);
-		return this;
-	}
-
-	public BoxBuilder preferredSize(int x, int y) {
-		return preferredSize(new Dimension(x, y));
-	}
-
-	public BoxBuilder preferredSize(Dimension d) {
-		recent.setPreferredSize(d);
-		return this;
+		return new BoxBuilderConfigureLatest(this, recent);
 	}
 	
 	public BoxBuilder addGlue() {
 		items.add(Box.createGlue());
-		recent = null;
 		return this;
 	}
 	
@@ -82,7 +44,6 @@ public class BoxBuilder extends PanelBuilder<BoxBuilder> {
 
 	public BoxBuilder addRigidArea(Dimension d) {
 		items.add(Box.createRigidArea(d));
-		recent = null;
 		return this;
 	}
 

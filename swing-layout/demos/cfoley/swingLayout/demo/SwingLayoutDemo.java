@@ -7,8 +7,6 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import cfoley.swingLayout.*;
-
 public class SwingLayoutDemo extends JFrame {
 	
 	public static void main(String[] args) {
@@ -29,7 +27,7 @@ public class SwingLayoutDemo extends JFrame {
 				.build());
 	}
 	
-	private PanelBuilder<?> commonManagers() {
+	private Object commonManagers() {
 		return grid().gap(50).pad(10).cols(4)
 				.add(borderLayout(), 
 						gridLayout(),

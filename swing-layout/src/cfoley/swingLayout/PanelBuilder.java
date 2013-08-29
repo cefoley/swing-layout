@@ -4,7 +4,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.border.Border;
 
-public abstract class PanelBuilder<T extends PanelBuilder<T>> implements ComponentConverter {
+public abstract class PanelBuilder<T extends PanelBuilder<T>> implements ComponentConverter, JComponentBuilder {
 
 	private int padLeft, padRight, padTop, padBottom;
 	private ComponentConverter converter;
@@ -48,6 +48,10 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 		return self();
 	}
 
+	/* (non-Javadoc)
+	 * @see cfoley.swingLayout.JComponentBuilder#build()
+	 */
+	@Override
 	public JComponent build() {
 		return addPadding(subclassBuild());
 	}
