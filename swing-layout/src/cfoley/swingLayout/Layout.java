@@ -5,6 +5,8 @@ import java.awt.CardLayout;
 import javax.swing.JTabbedPane;
 
 public class Layout {
+	
+	public static final String VERSION = "0.1 (Development)";
 
 	private static LayoutBuilder builder = new LayoutBuilder();
 
