@@ -70,4 +70,16 @@ public class Assertions {
 		assertArrayEquals(components, result().getComponents());
 	}
 
+	public void assertGridRowsAndColumns(int expectedRows, int expectedColumns) {
+		GridLayout layout = (GridLayout)result().getLayout();
+		assertEquals(expectedRows, layout.getRows());
+		assertEquals(expectedColumns, layout.getColumns());
+	}
+
+	public void assertGridGap(int expectedHGap, int expectedVGap) {
+		GridLayout layout = (GridLayout)result().getLayout();
+		assertEquals(expectedHGap, layout.getHgap());
+		assertEquals(expectedVGap, layout.getVgap());
+	}
+
 }
