@@ -56,13 +56,16 @@ public class Assertions {
 	}
 
 	public void assertBorderLayoutGaps(int expectedHorizontalGap, int expectedVerticalGap) {
-		BorderLayout layout = (BorderLayout)result().getLayout();
-		assertEquals(expectedHorizontalGap, layout.getHgap());
-		assertEquals(expectedVerticalGap, layout.getVgap());
+		assertEquals(expectedHorizontalGap, borderLayout().getHgap());
+		assertEquals(expectedVerticalGap, borderLayout().getVgap());
+	}
+
+	private BorderLayout borderLayout() {
+		return (BorderLayout)result().getLayout();
 	}
 
 	public void assertBorderLayoutConstraints(String expected, JComponent input) {
-		BorderLayout layout = (BorderLayout)result().getLayout();
+		BorderLayout layout = borderLayout();
 		assertEquals(expected, layout.getConstraints(input));
 	}
 
@@ -71,15 +74,34 @@ public class Assertions {
 	}
 
 	public void assertGridRowsAndColumns(int expectedRows, int expectedColumns) {
-		GridLayout layout = (GridLayout)result().getLayout();
-		assertEquals(expectedRows, layout.getRows());
-		assertEquals(expectedColumns, layout.getColumns());
+		assertEquals(expectedRows, gridLayout().getRows());
+		assertEquals(expectedColumns, gridLayout().getColumns());
+	}
+
+	private GridLayout gridLayout() {
+		return (GridLayout)result().getLayout();
 	}
 
 	public void assertGridGap(int expectedHGap, int expectedVGap) {
-		GridLayout layout = (GridLayout)result().getLayout();
-		assertEquals(expectedHGap, layout.getHgap());
-		assertEquals(expectedVGap, layout.getVgap());
+		assertEquals(expectedHGap, gridLayout().getHgap());
+		assertEquals(expectedVGap, gridLayout().getVgap());
+	}
+	
+	public void assertFlowLayoutGaps(int expectedHorizontalGap, int expectedVerticalGap) {
+		assertEquals(expectedHorizontalGap, flowLayout().getHgap());
+		assertEquals(expectedVerticalGap, flowLayout().getVgap());
+	}
+
+	private FlowLayout flowLayout() {
+		return (FlowLayout)result().getLayout();
+	}
+
+	public void assertFlowLayoutAlignment(int expected) {
+		assertEquals(expected, flowLayout().getAlignment());
+	}
+
+	public void assertFlowLayoutVAlignedOnBaseline(boolean expected) {
+		assertEquals(expected, flowLayout().getAlignOnBaseline());
 	}
 
 }
