@@ -104,4 +104,20 @@ public class Assertions {
 		assertEquals(expected, flowLayout().getAlignOnBaseline());
 	}
 
+	public void assertJScrollPaneComponentComponent(JComponent expected) {
+		JScrollPane panel = jScrollPane();
+		Component actual = panel.getViewport().getView();
+		assertSame(expected, actual);
+	}
+
+	private JScrollPane jScrollPane() {
+		return (JScrollPane)result();
+	}
+
+	public void assertScrollBars(int expectedHorizontal, int expectedVertical) {
+		assertEquals(expectedHorizontal, jScrollPane().getHorizontalScrollBarPolicy());
+		assertEquals(expectedVertical, jScrollPane().getVerticalScrollBarPolicy());
+		
+	}
+
 }
