@@ -18,6 +18,7 @@ public class CardBuilder extends PanelBuilder<CardBuilder> {
 		this.layout = layout;
 	}
 	
+	@Deprecated
 	public CardBuilder add(Object o) {
 		return add(o, null);
 	}

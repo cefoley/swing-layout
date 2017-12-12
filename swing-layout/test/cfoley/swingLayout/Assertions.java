@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import java.awt.*;
+import java.util.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -118,6 +119,21 @@ public class Assertions {
 		assertEquals(expectedHorizontal, jScrollPane().getHorizontalScrollBarPolicy());
 		assertEquals(expectedVertical, jScrollPane().getVerticalScrollBarPolicy());
 		
+	}
+
+	public void assertCardLayoutName(JComponent expected, String name) {
+		Component actual = cardLayoutComponentForName(name);
+		assertSame(expected, actual);
+	}
+
+	private Component cardLayoutComponentForName(String name) {
+		JComponent parent = result();
+		CardLayout layout = (CardLayout)parent.getLayout();
+		layout.show(parent, name);
+		return Arrays.asList(parent.getComponents())
+				.stream()
+				.filter(c -> c.isVisible())
+				.findFirst().get();
 	}
 
 }
