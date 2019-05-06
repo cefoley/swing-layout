@@ -1,5 +1,7 @@
 package cfoley.swingLayout;
 
+import java.awt.*;
+
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.border.Border;
@@ -9,6 +11,7 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 	private int padLeft, padRight, padTop, padBottom;
 	private ComponentConverter converter;
 	private Border border;
+	private Color backgroundColour;
 
 	protected PanelBuilder(ComponentConverter converter) {
 		this.converter = converter;
@@ -47,6 +50,11 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 		border = b;
 		return self();
 	}
+	
+	public T backgroundColour(Color c) {
+		this.backgroundColour = c;
+		return self();
+	}
 
 	/* (non-Javadoc)
 	 * @see cfoley.swingLayout.JComponentBuilder#build()
@@ -66,6 +74,8 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 				c.setBorder(makeBorder());
 			}
 		} 
+		if (backgroundColour != null)
+			c.setBackground(backgroundColour);
 		return c;
 	}
 	
