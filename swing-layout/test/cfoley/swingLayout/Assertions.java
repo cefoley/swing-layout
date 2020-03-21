@@ -1,13 +1,12 @@
 package cfoley.swingLayout;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 import java.awt.*;
 import java.util.*;
 
 import javax.swing.*;
+import javax.swing.Box.*;
 import javax.swing.border.*;
 
 public class Assertions {
@@ -72,8 +71,23 @@ public class Assertions {
 		assertEquals(expected, layout.getConstraints(input));
 	}
 
-	public void assertComponents(Component... components) {
-		assertArrayEquals(components, result().getComponents());
+	public void assertComponents(Component... expecteds) {
+		Component[] actuals = result().getComponents();
+		assertEquals(expecteds.length, actuals.length);
+		for (int i = 0; i < actuals.length; i++) {
+			String failureMessage = "Components differed at index " + i + ".";
+			if (expecteds[i] instanceof Filler) {
+				assertTrue(failureMessage, actuals[i] instanceof Filler);
+				assertFillersEqual((Filler)expecteds[i], (Filler)actuals[i]);
+			} else {
+				assertEquals(failureMessage, expecteds[i], actuals[i]);
+			}
+		}
+	}
+
+	private void assertFillersEqual(Filler expected, Filler actual) {
+		assertEquals(expected.getMinimumSize(), actual.getMinimumSize());
+		assertEquals(expected.getMaximumSize(), actual.getMaximumSize());
 	}
 
 	public void assertGridRowsAndColumns(int expectedRows, int expectedColumns) {
@@ -219,5 +233,21 @@ public class Assertions {
 
 	public void assertSplitPaneOneTouchExpandable(boolean expected) {
 		assertEquals(expected, splitPane().isOneTouchExpandable());
+	}
+
+	public void assertBoxIsVertical() {
+		assertEquals(BoxLayout.Y_AXIS, boxLayout().getAxis());
+	}
+
+	private BoxLayout boxLayout() {
+		return (BoxLayout)box().getLayout();
+	}
+
+	private Box box() {
+		return (Box)result();
+	}
+
+	public void assertBoxIsHorizontal() {
+		assertEquals(BoxLayout.X_AXIS, boxLayout().getAxis());
 	}
 }
