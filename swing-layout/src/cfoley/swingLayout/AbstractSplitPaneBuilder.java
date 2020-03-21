@@ -45,7 +45,7 @@ public abstract class AbstractSplitPaneBuilder<T extends AbstractSplitPaneBuilde
 	
 	public T resizeWeight(double w) {
 		if (w < 0 || w > 1) {
-			String message = "Resize weight must be in range 0--1, not " + w;
+			String message = "Resize weight must be in range 0--1, not " + w + ".";
 			throw new IllegalArgumentException(message);
 		}
 		resizeWeight = w;
@@ -87,22 +87,24 @@ public abstract class AbstractSplitPaneBuilder<T extends AbstractSplitPaneBuilde
 		switch (isContunuousLayout) {
 		case ON:
 			splitPane.setContinuousLayout(true);
+			break;
 		case OFF:
 			splitPane.setContinuousLayout(false);
+			break;
 		case DEFAULT:
 			// nothing to do here
 		}
 	}
 	
 	private void setMinSize(JComponent c, Dimension d) {
-		if (d != null) {
+		if (c != null && d != null) {
 			c.setMinimumSize(d);
 		}
 	}
 
 	private void setPreferredSize(JComponent c, Dimension d) {
-		if (d != null) {
-			c.setMinimumSize(d);
+		if (c != null && d != null) {
+			c.setPreferredSize(d);
 		}
 	}
 

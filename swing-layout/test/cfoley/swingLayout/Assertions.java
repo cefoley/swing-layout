@@ -163,4 +163,61 @@ public class Assertions {
 		
 	}
 
+	public void assertSplitPaneOrientation(int expected) {
+		assertEquals(expected, splitPane().getOrientation());
+	}
+
+	private JSplitPane splitPane() {
+		return (JSplitPane)result();
+	}
+
+	public void assertSplitPaneFirstComponent(Object expected) {
+		assertEquals(expected, splitPane().getLeftComponent());
+	}
+
+	public void assertSplitPaneSecondComponent(Object expected) {
+		assertEquals(expected, splitPane().getRightComponent());
+	}
+
+	public void assertSplitPaneFirstMinimumSize(int expectedWidth, int expectedHeight) {
+		Dimension expected = new Dimension(expectedWidth, expectedHeight);
+		assertEquals(expected, splitPane().getLeftComponent().getMinimumSize());
+	}
+
+	public void assertSplitPaneSecondMinimumSize(int expectedWidth, int expectedHeight) {
+		Dimension expected = new Dimension(expectedWidth, expectedHeight);
+		assertEquals(expected, splitPane().getRightComponent().getMinimumSize());
+	}
+
+	public void assertSplitPaneFirstPreferredSize(int expectedWidth, int expectedHeight) {
+		Dimension expected = new Dimension(expectedWidth, expectedHeight);
+		assertEquals(expected, splitPane().getLeftComponent().getPreferredSize());
+	}
+
+	public void assertSplitPaneSecondPreferredSize(int expectedWidth, int expectedHeight) {
+		Dimension expected = new Dimension(expectedWidth, expectedHeight);
+		assertEquals(expected, splitPane().getRightComponent().getPreferredSize());
+	}
+
+	public void assertPreferredSize(int expectedWidth, int expectedHeight) {
+		Dimension expected = new Dimension(expectedWidth, expectedHeight);
+		assertEquals(expected, result().getPreferredSize());
+	}
+
+	public void assertSplitPaneResizeWeight(double expected) {
+		assertEquals(expected, splitPane().getResizeWeight(), 0.0001);
+	}
+
+	public void assertSplitPaneContinuousLayoutIsDefault() {
+		boolean expected = new JSplitPane().isContinuousLayout();
+		assertSplitPaneContinuousLayout(expected);
+	}
+	
+	public void assertSplitPaneContinuousLayout(boolean expected) {
+		assertEquals(expected, splitPane().isContinuousLayout());
+	}
+
+	public void assertSplitPaneOneTouchExpandable(boolean expected) {
+		assertEquals(expected, splitPane().isOneTouchExpandable());
+	}
 }
