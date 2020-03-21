@@ -39,7 +39,9 @@ public class Assertions {
 	}
 	
 	public void assertPadding(int top, int left, int bottom, int right) {
-		Insets insets = ((EmptyBorder)result().getBorder()).getBorderInsets(null);
+		Insets insets = (result().getBorder() == null)
+				? new Insets(0, 0, 0, 0)
+				: ((EmptyBorder)result().getBorder()).getBorderInsets(null);
 		assertInsets(insets, top, left, bottom, right);
 	}
 
@@ -134,6 +136,31 @@ public class Assertions {
 				.stream()
 				.filter(c -> c.isVisible())
 				.findFirst().get();
+	}
+
+	public void assertTabbedPanePlacement(int expected) {
+		assertEquals(expected, jTabbedPane().getTabPlacement());
+	}
+
+	private JTabbedPane jTabbedPane() {
+		return (JTabbedPane)result();
+	}
+
+	public void assertTabbedPaneLayoutPolicy(int expected) {
+		assertEquals(expected, jTabbedPane().getTabLayoutPolicy());
+	}
+
+	public void assertTabbedPaneTab(
+			int index, 
+			String expectedLabel, 
+			Icon expectedIcon, 
+			Object expectedContent
+	) {
+		JTabbedPane actual = jTabbedPane();
+		assertEquals(expectedLabel, actual.getTitleAt(index));
+		assertEquals(expectedIcon, actual.getIconAt(index));
+		assertEquals(expectedContent, actual.getComponentAt(index));
+		
 	}
 
 }

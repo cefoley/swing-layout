@@ -6,13 +6,15 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 public abstract class PanelBuilder<T extends PanelBuilder<T>> implements ComponentConverter, JComponentBuilder {
-
+	
 	private int padLeft, padRight, padTop, padBottom;
 	private ComponentConverter converter;
 	private Border border;
+	private Color colour;
 
 	protected PanelBuilder(ComponentConverter converter) {
 		this.converter = converter;
+		colour = null;
 	}
 
 	@Override
@@ -48,6 +50,11 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 		border = b;
 		return self();
 	}
+	
+	public T colour(Color c) {
+		colour = c;
+		return self();
+	}
 
 	/* (non-Javadoc)
 	 * @see cfoley.swingLayout.JComponentBuilder#build()
@@ -70,6 +77,8 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 				c.setBorder(makeBorder());
 			}
 		} 
+		if (colour != null)
+			c.setBackground(colour);
 		return c;
 	}
 	
@@ -97,8 +106,5 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 		}
 	}
 	
-	
-
 	public abstract T self();
-
 }
