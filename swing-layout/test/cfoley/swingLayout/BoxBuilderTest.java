@@ -104,31 +104,32 @@ public class BoxBuilderTest {
 	
 	@Test
 	public void alignmentsOfZeroAndOneAreAllowed() {
-		builder.horizontal().add(new JLabel("some label"))
-			.alignment(0).alignment(1);
-		// Pass if no exception is thrown
+		BoxBuilderConfigureLatest builder2 = builder.horizontal().add(new JLabel("some label"));
+		catchExceptionsFromSettingAlignment(builder2, 0).assertNothingThrown();
+		catchExceptionsFromSettingAlignment(builder2, 1).assertNothingThrown();
+	}
+	
+	private ThrowableAssert catchExceptionsFromSettingAlignment(
+			BoxBuilderConfigureLatest builder, 
+			double alignment
+	) {
+		return ThrowableAssert.catchExceptionFrom(() -> builder.alignment(alignment));
 	}
 	
 	@Test
 	public void alignmentsLessThanZeroThrowException() {
 		BoxBuilderConfigureLatest builder2 = builder.horizontal().add(new JLabel("some label"));
-		try {
-			builder2.alignment(-0.01);
-		} catch (IllegalArgumentException e) {
-			assertEquals("Alignment should be in range 0--1, not -0.01.", e.getMessage());
-		}
-		// Pass if no exception is thrown
+		ThrowableAssert thrown =  catchExceptionsFromSettingAlignment(builder2, -0.01);
+		thrown.assertExceptionType(IllegalArgumentException.class);
+		thrown.assertMessageEquals("Alignment should be in range 0--1, not -0.01.");;
 	}
 	
 	@Test
 	public void alignmentsMoreThanOmneThrowException() {
 		BoxBuilderConfigureLatest builder2 = builder.horizontal().add(new JLabel("some label"));
-		try {
-			builder2.alignment(1.001);
-		} catch (IllegalArgumentException e) {
-			assertEquals("Alignment should be in range 0--1, not 1.001.", e.getMessage());
-		}
-		// Pass if no exception is thrown
+		ThrowableAssert thrown =  catchExceptionsFromSettingAlignment(builder2, 1.001);
+		thrown.assertExceptionType(IllegalArgumentException.class);
+		thrown.assertMessageEquals("Alignment should be in range 0--1, not 1.001.");;
 	}
 	
 	@Test

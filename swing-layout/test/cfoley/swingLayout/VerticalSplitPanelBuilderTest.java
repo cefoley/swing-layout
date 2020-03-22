@@ -1,7 +1,5 @@
 package cfoley.swingLayout;
 
-import static org.junit.Assert.*;
-
 import javax.swing.*;
 
 import org.junit.*;
@@ -37,13 +35,14 @@ public class VerticalSplitPanelBuilderTest {
 	
 	@Test
 	public void settingSizesWithoutComponentsDoesNotThrowAnException() {
-		builder
-			.topMinimumSize(10, 20)
-			.bottomMinimumSize(10, 20)
-			.topPreferredSize(10, 20)
-			.bottomPreferredSize(10, 20)
-			.build();
-		// Pass if no exception is thrown.
+		ThrowableAssert.catchExceptionFrom(() -> 
+			builder
+				.topMinimumSize(10, 20)
+				.bottomMinimumSize(10, 20)
+				.topPreferredSize(10, 20)
+				.bottomPreferredSize(10, 20)
+				.build())
+		.assertNothingThrown();
 	}
 	
 	@Test
@@ -84,28 +83,29 @@ public class VerticalSplitPanelBuilderTest {
 	
 	@Test
 	public void resizeWeightsBetweenZeroAndOneThrowNoException() {
-		builder.resizeWeight(0).resizeWeight(1);
-		// Pass if no exception is thrown.
+		ThrowableAssert.catchExceptionFrom(() -> 
+		builder.resizeWeight(0).resizeWeight(1))
+	.assertNothingThrown();
+		exceptionFromResizeWeight(0).assertNothingThrown();
+		exceptionFromResizeWeight(1).assertNothingThrown();
+	}
+	
+	private ThrowableAssert exceptionFromResizeWeight(double weight) {
+		return ThrowableAssert.catchExceptionFrom(() -> builder.resizeWeight(weight));
 	}
 	
 	@Test
 	public void resizeWeightBelowZeroThrowsException() {
-		try {
-			builder.resizeWeight(-0.1);
-			fail("Expected exception not thrown.");
-		} catch (IllegalArgumentException e) {
-			assertEquals("Resize weight must be in range 0--1, not -0.1.", e.getMessage());
-		}
+		ThrowableAssert thrown = exceptionFromResizeWeight(-0.1);
+		thrown.assertExceptionType(IllegalArgumentException.class);
+		thrown.assertMessageEquals("Resize weight must be in range 0--1, not -0.1.");
 	}
 	
 	@Test
 	public void resizeWeightAboveOneThrowsException() {
-		try {
-			builder.resizeWeight(1.1);
-			fail("Expected exception not thrown.");
-		} catch (IllegalArgumentException e) {
-			assertEquals("Resize weight must be in range 0--1, not 1.1.", e.getMessage());
-		}
+		ThrowableAssert thrown = exceptionFromResizeWeight(1.1);
+		thrown.assertExceptionType(IllegalArgumentException.class);
+		thrown.assertMessageEquals("Resize weight must be in range 0--1, not 1.1.");
 	}
 	
 	@Test
