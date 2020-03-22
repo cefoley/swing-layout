@@ -8,11 +8,11 @@ public class TabbedPaneBuilder extends PanelBuilder<TabbedPaneBuilder> {
 	
 	private JTabbedPane panel;
 
-	protected TabbedPaneBuilder(ComponentConverter converter) {
+	public TabbedPaneBuilder(ComponentConverter converter) {
 		this(converter, new JTabbedPane());
 	}
 	
-	protected TabbedPaneBuilder(ComponentConverter converter, JTabbedPane panel) {
+	public TabbedPaneBuilder(ComponentConverter converter, JTabbedPane panel) {
 		super(converter);
 		this.panel = panel;
 	}

@@ -1,17 +1,20 @@
 package cfoley.swingLayout;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
+import java.awt.*;
+
+import javax.swing.*;
 import javax.swing.border.Border;
 
 public abstract class PanelBuilder<T extends PanelBuilder<T>> implements ComponentConverter, JComponentBuilder {
-
+	
 	private int padLeft, padRight, padTop, padBottom;
 	private ComponentConverter converter;
 	private Border border;
+	private Color colour;
 
 	protected PanelBuilder(ComponentConverter converter) {
 		this.converter = converter;
+		colour = null;
 	}
 
 	@Override
@@ -47,12 +50,17 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 		border = b;
 		return self();
 	}
+	
+	public T colour(Color c) {
+		colour = c;
+		return self();
+	}
 
 	/* (non-Javadoc)
 	 * @see cfoley.swingLayout.JComponentBuilder#build()
 	 */
 	@Override
-	public JComponent build() {
+	public final JComponent build() {
 		return addPadding(subclassBuild());
 	}
 
@@ -61,11 +69,16 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 	private JComponent addPadding(JComponent c) {
 		if (hasBorder()) {
 			if (c.getBorder() != null) {
-				return Layout.borders().center(c).border(makeBorder()).build();
+				JPanel result = new JPanel(new BorderLayout());
+				result.add(c, BorderLayout.CENTER);
+				result.setBorder(makeBorder());
+				return result;
 			} else {
 				c.setBorder(makeBorder());
 			}
 		} 
+		if (colour != null)
+			c.setBackground(colour);
 		return c;
 	}
 	
@@ -93,8 +106,5 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 		}
 	}
 	
-	
-
 	public abstract T self();
-
 }

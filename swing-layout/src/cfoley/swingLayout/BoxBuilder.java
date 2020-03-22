@@ -12,7 +12,7 @@ public class BoxBuilder extends PanelBuilder<BoxBuilder> {
 	List<BoxedWidgetMaker> items = new ArrayList<>();
 
 	
-	protected BoxBuilder(ComponentConverter converter) {
+	BoxBuilder(ComponentConverter converter) {
 		super(converter);
 	}
 	

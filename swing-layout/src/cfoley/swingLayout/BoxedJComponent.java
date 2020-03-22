@@ -17,7 +17,7 @@ class BoxedJComponent implements BoxedWidgetMaker {
 	
 	void setAlignment(float d) {
 		if (d < 0 || d > 1) {
-			String message = "Alignment should be in range 0--1, not " + d;
+			String message = "Alignment should be in range 0--1, not " + d + ".";
 			throw new IllegalArgumentException(message);
 		}
 		alignment = d;
