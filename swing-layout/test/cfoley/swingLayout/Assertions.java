@@ -57,6 +57,10 @@ public class Assertions {
 		assertEquals(right, insets.right);
 	}
 
+	public void assertColor(Color expected) {
+		assertEquals(expected, result().getBackground());
+	}
+
 	public void assertBorderLayoutGaps(int expectedHorizontalGap, int expectedVerticalGap) {
 		assertEquals(expectedHorizontalGap, borderLayout().getHgap());
 		assertEquals(expectedVerticalGap, borderLayout().getVgap());

@@ -91,6 +91,12 @@ public class PanelBuilderTest {
 	}
 
 	@Test
+	public void colour() {
+		builder.colour(Color.RED);
+		a.assertColor(Color.RED);
+	}
+	
+	@Test
 	public void combinePaddingWithExistingBorder() {
 		Border originalBorder = BorderFactory.createLineBorder(Color.BLUE);
 		input.setBorder(originalBorder);
