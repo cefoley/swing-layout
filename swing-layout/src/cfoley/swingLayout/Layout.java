@@ -5,13 +5,14 @@ import java.awt.CardLayout;
 import javax.swing.JTabbedPane;
 
 public class Layout {
-	
-	public static final String VERSION = "0.1 (Development)";
-
 	private static LayoutBuilder builder = new LayoutBuilder();
 
-	public LayoutBuilder getDefaultLauoutBuilder() {
+	public static LayoutBuilder getDefaultLauoutBuilder() {
 		return builder;
+	}
+
+	public static void setDefaultLayoutBuilder(LayoutBuilder newLayoutBuilder) {
+		builder = newLayoutBuilder;
 	}
 
 	public static BorderBuilder borders() {
@@ -73,6 +74,4 @@ public class Layout {
 	public static TabbedPaneBuilder tabs(JTabbedPane panel) {
 		return builder.tabs(panel);
 	}
-
-
 }
