@@ -10,11 +10,11 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 	private int padLeft, padRight, padTop, padBottom;
 	private ComponentConverter converter;
 	private Border border;
-	private Color colour;
+	private Color backgroundColour;
 
 	protected PanelBuilder(ComponentConverter converter) {
 		this.converter = converter;
-		colour = null;
+		backgroundColour = null;
 	}
 
 	@Override
@@ -51,8 +51,8 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 		return self();
 	}
 	
-	public T colour(Color c) {
-		colour = c;
+	public T backgroundColour(Color c) {
+		this.backgroundColour = c;
 		return self();
 	}
 
@@ -77,8 +77,8 @@ public abstract class PanelBuilder<T extends PanelBuilder<T>> implements Compone
 				c.setBorder(makeBorder());
 			}
 		} 
-		if (colour != null)
-			c.setBackground(colour);
+		if (backgroundColour != null)
+			c.setBackground(backgroundColour);
 		return c;
 	}
 	

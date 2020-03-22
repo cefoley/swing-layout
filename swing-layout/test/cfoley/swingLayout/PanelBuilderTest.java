@@ -91,8 +91,14 @@ public class PanelBuilderTest {
 	}
 
 	@Test
+	public void defaultColour() {
+		Color expectedColour = new JPanel().getBackground();
+		a.assertColor(expectedColour);
+	}
+	
+	@Test
 	public void colour() {
-		builder.colour(Color.RED);
+		builder.backgroundColour(Color.RED);
 		a.assertColor(Color.RED);
 	}
 	
